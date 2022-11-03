@@ -1,5 +1,6 @@
-import React, { useState , useRef, useEffect } from 'react';
+import React, { useState , useRef, useEffect, useContext } from 'react';
 import { onePokemon } from '../../service/FetchService';
+import { myContext } from '../../App';
 
 const initialState = {
     // id: 0,
@@ -9,6 +10,9 @@ const initialState = {
 
 export default function Card( { name } ) {
     
+    //contexto para ver si el pokemon esta en los likes, y sacarlo o ponerlo
+    const { stateLike, dispatchLike } = useContext(myContext);
+
     const [pokemon, setPokemon] = useState(initialState);
 
     const cargarPokemon = async () => {
@@ -29,7 +33,6 @@ export default function Card( { name } ) {
     useEffect(() => {
         
         cargarPokemon();
-
     }, [])
 
     return (

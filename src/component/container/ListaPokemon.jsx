@@ -1,14 +1,13 @@
-import React, { useEffect , useState } from 'react';
+import React, { useEffect , useState , useContext } from 'react';
 import { listaPokemon, onePokemon } from '../../service/FetchService';
 import Card from '../pure/Card';
-
 //Estilos
 import '../../scss/lista_pokemon.scss';
+
 
 const initialState = [];
 
 export default function ListaPokemon() {
-
     
     const [lista, setLista] = useState(initialState);
 
@@ -21,8 +20,6 @@ export default function ListaPokemon() {
             listaFetch.results.map( ( pokemon ) => {
                 nuevaLista = [ ...nuevaLista, {name: pokemon.name, url: pokemon.url}]
             });
-
-            console.log(nuevaLista)
 
             setLista([...lista,...nuevaLista])
 
