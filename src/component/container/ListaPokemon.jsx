@@ -2,6 +2,9 @@ import React, { useEffect , useState } from 'react';
 import { listaPokemon, onePokemon } from '../../service/FetchService';
 import Card from '../pure/Card';
 
+//Estilos
+import '../../scss/lista_pokemon.scss';
+
 const initialState = [];
 
 export default function ListaPokemon() {
@@ -37,17 +40,19 @@ export default function ListaPokemon() {
     }, []);
 
     return (
-        <div>
-            <h2>Lista</h2>
-            { lista.map( ( pokemon , key ) => ( 
-                <Card  
-                key={ key } 
-                { ...pokemon }
-                ></Card>
-             )) }
-             <h1>{lista.length}</h1>
-             <button onClick={ () => cargarPokemons( 20 ) } >
-                CARGAR +
+        <div className='lista__pokemon-container'>
+            <h2 className='lista__pokemon-titulo'>Lista</h2>
+            <ul className='lista__pokemon'>
+                { lista.map( ( pokemon , key ) => ( 
+                    <Card  
+                    key={ key } 
+                    { ...pokemon }
+                    ></Card>
+                )) }
+            </ul>
+            <h1>Total de Pokemon: {lista.length}</h1>
+             <button className='button__cargar' onClick={ () => cargarPokemons( lista.length ) } >
+                CARGAR 20+
              </button>
         </div>
     )

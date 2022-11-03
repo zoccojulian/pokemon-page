@@ -2,7 +2,7 @@ import React, { useState , useRef, useEffect } from 'react';
 import { onePokemon } from '../../service/FetchService';
 
 const initialState = {
-    id: 0,
+    // id: 0,
     name: '',
     foto: ''
 };
@@ -33,10 +33,10 @@ export default function Card( { name } ) {
     }, [])
 
     return (
-        <div>
-            <img src= { pokemon.foto } ></img>
+        <li className='lista__pokemon-item'>
+            <img src= { pokemon.foto } className='lista__item-img' ></img>
             <h3> {pokemon.id } </h3>
             <h4> { pokemon.name } </h4>
-        </div>
+        </li>
     )
 }
