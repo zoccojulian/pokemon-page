@@ -1,15 +1,15 @@
-import React, { useReducer , useContext } from 'react';
+import React, { useReducer , useContext, useEffect } from 'react';
 import './App.css';
 import BuscarPokemon from './component/pure/BuscarPokemon';
 import ListaPokemon from './component/container/ListaPokemon';
 
 
 //Actions
-const LIKE_ADD = 'LIKE_ADD';
-const LIKE_CLEAR = 'LIKE_CLEAR';
+export const LIKE_ADD = 'LIKE_ADD';
+export const LIKE_CLEAR = 'LIKE_CLEAR';
 
 //Estado inicial
-const initialState = JSON.parse(localStorage.getItem('pokemonAPI')) || [{id:0, name:'julian'}];
+const initialState = JSON.parse(localStorage.getItem('pokemonAPI')) || [];
 
 //Contexto
 export const myContext = React.createContext(null);
@@ -19,7 +19,11 @@ function App() {
   const likeReducer = ( state, action ) => {
     switch (action.type) {
       case LIKE_ADD:
-        return [ ...state, { id: action.payload.id, name: action.payload.name } ]
+        return [ ...state, 
+          { id: action.payload.id, 
+            name: action.payload.name,
+            foto: action.payload.foto 
+          } ]
 
       case LIKE_CLEAR:
         return state.filter( (pokemon) => pokemon.id !== action.payload.id )
@@ -31,11 +35,20 @@ function App() {
 
   const [stateLike, dispatchLike] = useReducer(likeReducer, initialState);
 
+  useEffect(() => {
+    localStorage.setItem('pokemonAPI', JSON.stringify(stateLike))
+  }, [ stateLike ])
 
   return (
     <myContext.Provider value={ { stateLike, dispatchLike } }>
       <div className="App">
-        { stateLike.map( ( pokemon , key) => <h4 key={ key } >{ pokemon.name }</h4> ) }
+        <h5>Favoritos</h5>
+        { stateLike.map( ( pokemon , key) => 
+          <img key={ key }
+            src= { pokemon.foto }
+            style={ { width:'50px' } }
+          ></img>
+         ) }
         <BuscarPokemon></BuscarPokemon>
         <ListaPokemon></ListaPokemon>
       </div>
