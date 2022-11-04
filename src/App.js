@@ -23,7 +23,10 @@ function App() {
           { id: action.payload.id, 
             name: action.payload.name,
             foto: action.payload.foto 
-          } ]
+          } ].sort((a,b) => {
+                  if(a.id > b.id){ return 1}
+                    else if(a.id < b.id){ return -1}
+                      else {return 0} })
 
       case LIKE_CLEAR:
         return state.filter( (pokemon) => pokemon.id !== action.payload.id )
@@ -36,8 +39,11 @@ function App() {
   const [stateLike, dispatchLike] = useReducer(likeReducer, initialState);
 
   useEffect(() => {
-    localStorage.setItem('pokemonAPI', JSON.stringify(stateLike))
+
+    localStorage.setItem('pokemonAPI', JSON.stringify(stateLike));
+    
   }, [ stateLike ])
+
 
   return (
     <myContext.Provider value={ { stateLike, dispatchLike } }>

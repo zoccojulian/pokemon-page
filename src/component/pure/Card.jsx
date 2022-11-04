@@ -20,17 +20,19 @@ export default function Card( { name } ) {
 
         try {
             
-            const datosPokemon = await onePokemon(name);
-            const id = datosPokemon.id;
-            const nombre = datosPokemon.forms[0].name ;
-            const foto = datosPokemon.sprites.other.dream_world.front_default
-
+            let datosPokemon = await onePokemon(name);
+            let id = datosPokemon.id;
+            let nombre = datosPokemon.forms[0].name ;
+            let foto = datosPokemon.sprites.other.dream_world.front_default ;
+            let like = false;
             if (stateLike.find( ( pokemon ) => {
                 if(pokemon.id == id)
                     return true
-            } ));
+                } )){
+                    like = true;
+                } 
 
-            setPokemon({id, name, foto});
+            setPokemon({id, name, foto, like});
         } catch (error) {
             
         }
@@ -73,10 +75,12 @@ export default function Card( { name } ) {
             className='lista__pokemon-item'
             onClick={ toggleLike }
         >
-            <img src= { pokemon.foto } className='lista__item-img' ></img>
-            <h3> {pokemon.id } </h3>
-            <h4> { pokemon.name } </h4>
-            <h5>{ pokemon.like ? 'like' : '' }</h5>
+            <div className='lista__item-img-container'>
+                <img src= { pokemon.foto } className='lista__item-img' ></img>
+            </div>
+            <h3 className='lista__item-id' > {pokemon.id } </h3>
+            <h4 className='lista__item-name' > { pokemon.name } </h4>
+            <h5 className='lista__item-like' >{ pokemon.like ? 'like' : '' }</h5>
         </li>
     )
 }
