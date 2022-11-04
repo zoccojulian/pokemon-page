@@ -1,0 +1,40 @@
+.likes__container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .likes__lista{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+
+        .likes__item{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            position: relative;
+
+            .likes__item-id{
+                position: absolute;
+                left: -5px;
+                top: -5px;
+                background-color: black;
+                width: 25px;
+                height: 25px;
+                border-radius: 50%;
+                color: white;
+
+            }
+
+            .likes__item-img{
+                width: 90%;
+            }
+        }
+    }
+}

@@ -42,7 +42,8 @@ export default function Card( { name } ) {
     useEffect(() => {
         
         cargarPokemon();
-    }, [])
+
+    }, [ stateLike ])
 
     const toggleLike = () => {
         if(pokemon.like == true){

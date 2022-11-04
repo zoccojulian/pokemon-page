@@ -2,6 +2,7 @@ import React, { useReducer , useContext, useEffect } from 'react';
 import './App.css';
 import BuscarPokemon from './component/pure/BuscarPokemon';
 import ListaPokemon from './component/container/ListaPokemon';
+import ListaLikes from './component/container/ListaLikes';
 
 
 //Actions
@@ -48,13 +49,14 @@ function App() {
   return (
     <myContext.Provider value={ { stateLike, dispatchLike } }>
       <div className="App">
-        <h5>Favoritos</h5>
+        {/* <h5>Favoritos</h5>
         { stateLike.map( ( pokemon , key) => 
           <img key={ key }
             src= { pokemon.foto }
             style={ { width:'50px' } }
           ></img>
-         ) }
+         ) } */}
+        <ListaLikes></ListaLikes>
         <BuscarPokemon></BuscarPokemon>
         <ListaPokemon></ListaPokemon>
       </div>

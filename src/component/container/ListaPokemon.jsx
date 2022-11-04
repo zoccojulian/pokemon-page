@@ -7,6 +7,7 @@ import '../../scss/lista_pokemon.scss';
 
 const initialState = [];
 
+
 export default function ListaPokemon() {
     
     const [lista, setLista] = useState(initialState);
@@ -48,9 +49,9 @@ export default function ListaPokemon() {
                 )) }
             </ul>
             <h1>Total de Pokemon: {lista.length}</h1>
-             <button className='button__cargar' onClick={ () => cargarPokemons( lista.length ) } >
+            <button className='button__cargar' onClick={ () => cargarPokemons( lista.length ) } >
                 CARGAR 20+
-             </button>
+            </button>
         </div>
     )
 }
