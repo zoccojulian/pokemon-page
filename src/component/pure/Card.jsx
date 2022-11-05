@@ -36,7 +36,14 @@ export default function Card( { name } ) {
             let id = datosPokemon.id;
             let nombre = datosPokemon.forms[0].name ;
             // let foto = datosPokemon.sprites.other.dream_world.front_default ;
-            let foto = datosPokemon.sprites.other['official-artwork'].front_default;
+            // let foto = datosPokemon.sprites.other['official-artwork'].front_default;
+            let foto = '';
+            if( datosPokemon.sprites.other.dream_world.front_default !== null ){
+                foto = datosPokemon.sprites.other.dream_world.front_default
+            }else{
+                foto = datosPokemon.sprites.other['official-artwork'].front_default
+            }
+            
             let like = isLike( id );
             // let like = false;
             // if (stateLike.find( ( pokemon ) => {

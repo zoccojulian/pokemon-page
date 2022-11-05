@@ -67,10 +67,6 @@ export default function ListaPokemon() {
                     ></Card>
                 )) }
             </ul>
-            {/* <h1>Total de Pokemon: {lista.length}</h1> */}
-            {/* <button className='button__cargar' onClick={ () => cargarPokemons( lista.length ) } >
-                CARGAR 20+
-            </button> */}
         </div>
     )
 }
