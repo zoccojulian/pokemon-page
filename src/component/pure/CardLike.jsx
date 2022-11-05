@@ -5,7 +5,6 @@ export default function CardLike( { pokemon } ) {
 
     const { dispatchLike } = useContext(myContext);
 
-    console.log(pokemon)
     const borrar = () => {
         dispatchLike( { 
             type: LIKE_CLEAR,

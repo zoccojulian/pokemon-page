@@ -16,6 +16,18 @@ export default function Card( { name } ) {
 
     const [pokemon, setPokemon] = useState(initialState);
 
+    const isLike = ( id ) => {
+
+        if (stateLike.find( ( pokemon ) => {
+            if(pokemon.id == id)
+                return true
+            } )){
+                return true;
+            } else {
+                return false; 
+            }
+    }
+
     const cargarPokemon = async () => {
 
         try {
@@ -23,14 +35,16 @@ export default function Card( { name } ) {
             let datosPokemon = await onePokemon(name);
             let id = datosPokemon.id;
             let nombre = datosPokemon.forms[0].name ;
-            let foto = datosPokemon.sprites.other.dream_world.front_default ;
-            let like = false;
-            if (stateLike.find( ( pokemon ) => {
-                if(pokemon.id == id)
-                    return true
-                } )){
-                    like = true;
-                } 
+            // let foto = datosPokemon.sprites.other.dream_world.front_default ;
+            let foto = datosPokemon.sprites.other['official-artwork'].front_default;
+            let like = isLike( id );
+            // let like = false;
+            // if (stateLike.find( ( pokemon ) => {
+            //     if(pokemon.id == id)
+            //         return true
+            //     } )){
+            //         like = true;
+            //     } 
 
             setPokemon({id, name, foto, like});
         } catch (error) {
@@ -43,9 +57,18 @@ export default function Card( { name } ) {
         
         cargarPokemon();
 
+    }, [ name ])
+
+    useEffect(() => {
+
+        if ( isLike( pokemon.id ) !== pokemon.like ) {
+            setPokemon( { ...pokemon, like: !pokemon.like } )
+        }
+        
     }, [ stateLike ])
 
     const toggleLike = () => {
+        
         if(pokemon.like == true){
 
             dispatchLike( { 

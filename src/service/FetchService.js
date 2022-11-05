@@ -1,5 +1,5 @@
 
-const URL_POKEMON = 'https://pokeapi.co/api/v2/pokemon' 
+export const URL_POKEMON = 'https://pokeapi.co/api/v2/pokemon'; 
 
 export const onePokemon = async ( id ) => {
 
@@ -11,9 +11,9 @@ export const onePokemon = async ( id ) => {
     return response.json();
 }
 
-export const listaPokemon = async ( desde ) => {
+export const listaPokemon = async ( url ) => {
 
-    const response = await fetch(`${URL_POKEMON}?offset=${desde}&limit=20`);
+    const response = await fetch( url );
 
     // console.log('Status:', response.status);
     // console.log('OK:', response.ok)

@@ -23,8 +23,7 @@ export default function BuscarPokemon() {
 
             
             const nombre = pokemonPrueba.forms[0].name ;
-            const url = pokemonPrueba.sprites.other.dream_world.front_default
-
+            const url = pokemonPrueba.sprites.other['official-artwork'].front_default;
             setPokemon({ nombre, url });
             
         } catch (error) {
