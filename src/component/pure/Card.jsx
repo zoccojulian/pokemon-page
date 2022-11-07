@@ -1,6 +1,8 @@
 import React, { useState , useRef, useEffect, useContext } from 'react';
 import { onePokemon } from '../../service/FetchService';
+import PropTypes from 'prop-types';
 import { LIKE_ADD, LIKE_CLEAR, myContext } from '../../App';
+import '../../scss/card.scss'
 
 const initialState = {
     // id: 0,
@@ -45,13 +47,6 @@ export default function Card( { name } ) {
             }
             
             let like = isLike( id );
-            // let like = false;
-            // if (stateLike.find( ( pokemon ) => {
-            //     if(pokemon.id == id)
-            //         return true
-            //     } )){
-            //         like = true;
-            //     } 
 
             setPokemon({id, name, foto, like});
         } catch (error) {
@@ -115,3 +110,17 @@ export default function Card( { name } ) {
         </li>
     )
 }
+
+
+
+
+
+
+Card.propTypes = {
+    name: PropTypes.string.isRequired
+}
+
+
+
+
+

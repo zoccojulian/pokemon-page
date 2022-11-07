@@ -1,55 +1,55 @@
 import React, { useState , useRef } from 'react';
 import { onePokemon } from '../../service/FetchService';
+import Card from './Card';
+import '../../scss/buscar.scss';
 
 const estadoInicial = {
-    nombre: '',
-    url:''
+        encontrado: false,
+        textoError:'',
+        nombre: ''
 }
 
 
 export default function BuscarPokemon() {
 
+    // const [pokemon, setPokemon] = useState(estadoInicial);
+
     const [pokemon, setPokemon] = useState(estadoInicial);
 
     const idRef = useRef();
 
-    const probar = async ( id ) => {
+    const buscarPokemon = async ( id ) => {
 
         try {
 
             const pokemonPrueba = await onePokemon(id);
-            console.log(pokemonPrueba.sprites.other.dream_world.front_default)
-            console.log(pokemonPrueba.forms[0].name)
-
-            
             const nombre = pokemonPrueba.forms[0].name ;
-            const url = pokemonPrueba.sprites.other['official-artwork'].front_default;
-            setPokemon({ nombre, url });
+            // const url = pokemonPrueba.sprites.other['official-artwork'].front_default;
+            setPokemon({ encontrado: true, textoError:'' ,nombre});
             
         } catch (error) {
-            console.log('error')
+            setPokemon({ encontrado:false, textoError:'No se econtró ningún pokemon',nombre: '' })
         }
     }
 
     const submit = (e) => {
         e.preventDefault();
-        console.log(idRef.current.value)
-        probar(idRef.current.value);
+        buscarPokemon(idRef.current.value);
     }
 
     return (
-        <div>
-            <img src= { pokemon.url } ></img>
-            <h1> { pokemon.nombre } </h1>
+        <div className='buscar'>
             <form onSubmit={ submit }>
                 <input
-                    placeholder='Numero de Pokemon'
+                    placeholder='Numero nombre de Pokemon'
                     ref={ idRef }
                 ></input>
                 <button  type='submit'>
                 POKEMON
-            </button>
+                </button>
             </form>
+            { pokemon.textoError !== '' && <span>{ pokemon.textoError }</span> }
+            { pokemon.encontrado  && <Card name= { pokemon.nombre }></Card>}
             
         </div>
     )

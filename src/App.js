@@ -1,8 +1,10 @@
 import React, { useReducer , useContext, useEffect } from 'react';
 import './App.css';
+import './scss/app.scss';
 import BuscarPokemon from './component/pure/BuscarPokemon';
 import ListaPokemon from './component/container/ListaPokemon';
 import ListaLikes from './component/container/ListaLikes';
+import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
 
 
 //Actions
@@ -47,20 +49,40 @@ function App() {
 
 
   return (
-    <myContext.Provider value={ { stateLike, dispatchLike } }>
-      <div className="App">
-        {/* <h5>Favoritos</h5>
-        { stateLike.map( ( pokemon , key) => 
-          <img key={ key }
-            src= { pokemon.foto }
-            style={ { width:'50px' } }
-          ></img>
-         ) } */}
-        <ListaLikes></ListaLikes>
-        <BuscarPokemon></BuscarPokemon>
-        <ListaPokemon></ListaPokemon>
-      </div>
-    </myContext.Provider>
+    <div className="App">
+      <h1>POKEMON PAGE</h1>
+      <myContext.Provider value={ { stateLike, dispatchLike } }>
+        <Router>
+          <ul>
+            <li className=''>
+              <Link to='/'>HOME</Link>
+            </li>
+            <li>
+              <Link to='/lista'>Lista de Pokemon</Link>
+            </li>
+            <li>
+              <Link to='/buscar'>Buscar</Link>
+            </li>
+            <li>
+              <Link to='/favoritos'>
+                Favoritos <span>{ stateLike.length }</span>
+              </Link>
+            </li>
+          </ul>
+          <Routes>
+            <Route exact path='/' element={
+              <img
+              src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/800px-International_Pok%C3%A9mon_logo.svg.png'
+              style= { { width: '100%' } }
+              ></img>} ></Route>
+            <Route exact path='/lista' element={ <ListaPokemon></ListaPokemon> } ></Route>
+            <Route exact path='/buscar' element={ <BuscarPokemon></BuscarPokemon> } ></Route>
+            <Route exact path='/favoritos' element={ <ListaLikes></ListaLikes> } ></Route>
+          </Routes>
+        </Router>
+        </myContext.Provider>
+    </div>
+    
     
   );
 }

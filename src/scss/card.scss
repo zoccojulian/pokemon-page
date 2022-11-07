@@ -1,0 +1,42 @@
+.lista__pokemon-item{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    border: 0.5px solid black;
+    border-radius: 15px;
+    width: 150px;
+    height: 200px;
+    // gap: 1rem;
+    
+
+    .lista__item-img-container{
+        width: 90%;
+        height: 70%;
+
+        .lista__item-img{
+            width: 95%;
+            height: 95%;
+            object-fit: contain;
+        }
+    }
+    
+
+    .lista__item-id{
+        position: absolute;
+        left: 7px;
+        top: 5px;
+        margin: 0;
+    }
+
+    .lista__item-name{
+        margin: 0;
+    }
+
+    .lista__item-like{
+        margin: 0;
+    }
+
+}
