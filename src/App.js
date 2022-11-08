@@ -1,5 +1,5 @@
 import React, { useReducer , useContext, useEffect } from 'react';
-import './App.css';
+// import './App.css';
 import './scss/app.scss';
 import BuscarPokemon from './component/pure/BuscarPokemon';
 import ListaPokemon from './component/container/ListaPokemon';
@@ -51,19 +51,19 @@ function App() {
   return (
     <div className="App">
       <h1>POKEMON PAGE</h1>
-      <myContext.Provider value={ { stateLike, dispatchLike } }>
+      <myContext.Provider value={ { stateLike, dispatchLike } } >
         <Router>
-          <ul>
-            <li className=''>
+          <ul className='App__lista'>
+            <li className='App__lista__item'>
               <Link to='/'>HOME</Link>
             </li>
-            <li>
+            <li className='App__lista__item'>
               <Link to='/lista'>Lista de Pokemon</Link>
             </li>
-            <li>
+            <li className='App__lista__item'>
               <Link to='/buscar'>Buscar</Link>
             </li>
-            <li>
+            <li className='App__lista__item'>
               <Link to='/favoritos'>
                 Favoritos <span>{ stateLike.length }</span>
               </Link>
