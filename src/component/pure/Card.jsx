@@ -3,6 +3,7 @@ import { onePokemon } from '../../service/FetchService';
 import PropTypes from 'prop-types';
 import { LIKE_ADD, LIKE_CLEAR, myContext } from '../../App';
 import '../../scss/card.scss';
+import PokeBola from './animaciones/PokeBola';
 
 const initialState = {
     // id: 0,
@@ -12,6 +13,8 @@ const initialState = {
 };
 
 export default function Card( { name } ) {
+
+    const [cargando, setCargando] = useState(true);
     
     //contexto para ver si el pokemon esta en los likes, y sacarlo o ponerlo
     const { stateLike, dispatchLike } = useContext(myContext);
@@ -54,7 +57,14 @@ export default function Card( { name } ) {
     }
 
     useEffect(() => {
+        
+        setCargando(false)
 
+    }, [pokemon])
+
+    useEffect(() => {
+
+        setCargando(true);
         cargarPokemon();
 
     }, [ name ])
@@ -99,7 +109,8 @@ export default function Card( { name } ) {
             className='lista__pokemon-item'
             onClick={ toggleLike }
         >
-            <div className='lista__item-img-container'>
+            { cargando ? <PokeBola/> : null }
+            <div className='lista__item-img-container' style={ { visibility: cargando ? 'hidden' : 'visible' } }>
                 <img src= { pokemon.foto } className='lista__item-img'></img>
             </div>
             <h3 className='lista__item-id' > {pokemon.id } </h3>

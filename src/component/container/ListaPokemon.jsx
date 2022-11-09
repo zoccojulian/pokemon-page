@@ -56,7 +56,6 @@ export default function ListaPokemon() {
     useEffect(() => {
         
         let offsetParaPeticion = pokemonPagina.next.replace('https://pokeapi.co/api/v2/pokemon/?offset=', '').replace(`&limit=${numeroPorPagina}`,'');
-        console.log(offsetParaPeticion)
         cargarPokemons( `${URL_POKEMON}/?offset=${offsetParaPeticion-20}&limit=${numeroPorPagina}` );
     }, [ ]);
 
