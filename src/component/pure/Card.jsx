@@ -2,7 +2,7 @@ import React, { useState , useRef, useEffect, useContext } from 'react';
 import { onePokemon } from '../../service/FetchService';
 import PropTypes from 'prop-types';
 import { LIKE_ADD, LIKE_CLEAR, myContext } from '../../App';
-import '../../scss/card.scss'
+import '../../scss/card.scss';
 
 const initialState = {
     // id: 0,
@@ -33,12 +33,9 @@ export default function Card( { name } ) {
     const cargarPokemon = async () => {
 
         try {
-            
             let datosPokemon = await onePokemon(name);
             let id = datosPokemon.id;
             let nombre = datosPokemon.forms[0].name ;
-            // let foto = datosPokemon.sprites.other.dream_world.front_default ;
-            // let foto = datosPokemon.sprites.other['official-artwork'].front_default;
             let foto = '';
             if( datosPokemon.sprites.other.dream_world.front_default !== null ){
                 foto = datosPokemon.sprites.other.dream_world.front_default
@@ -49,14 +46,15 @@ export default function Card( { name } ) {
             let like = isLike( id );
 
             setPokemon({id, name, foto, like});
+            
+
         } catch (error) {
             
         }
     }
 
-
     useEffect(() => {
-        
+
         cargarPokemon();
 
     }, [ name ])
@@ -102,7 +100,7 @@ export default function Card( { name } ) {
             onClick={ toggleLike }
         >
             <div className='lista__item-img-container'>
-                <img src= { pokemon.foto } className='lista__item-img' ></img>
+                <img src= { pokemon.foto } className='lista__item-img'></img>
             </div>
             <h3 className='lista__item-id' > {pokemon.id } </h3>
             <h4 className='lista__item-name' > { pokemon.name } </h4>

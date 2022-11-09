@@ -5,6 +5,7 @@ import BuscarPokemon from './component/pure/BuscarPokemon';
 import ListaPokemon from './component/container/ListaPokemon';
 import ListaLikes from './component/container/ListaLikes';
 import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
+import Home from './page/Home';
 
 
 //Actions
@@ -70,11 +71,7 @@ function App() {
             </li>
           </ul>
           <Routes>
-            <Route exact path='/' element={
-              <img
-              src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/800px-International_Pok%C3%A9mon_logo.svg.png'
-              style= { { width: '100%' } }
-              ></img>} ></Route>
+            <Route exact path='/' element={ <Home></Home> } ></Route>
             <Route exact path='/lista' element={ <ListaPokemon></ListaPokemon> } ></Route>
             <Route exact path='/buscar' element={ <BuscarPokemon></BuscarPokemon> } ></Route>
             <Route exact path='/favoritos' element={ <ListaLikes></ListaLikes> } ></Route>

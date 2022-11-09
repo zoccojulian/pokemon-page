@@ -9,12 +9,15 @@
     border-radius: 15px;
     width: 150px;
     height: 200px;
-    // gap: 1rem;
     background-image: url('../assets/fondo-card/FONDO_CARD.jpg');
     background-repeat: no-repeat;
     background-size: cover;
 
-    
+    .item__pokebola{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
 
     .lista__item-img-container{
         width: 90%;
