@@ -3,7 +3,6 @@ import { onePokemon } from '../../service/FetchService';
 import PropTypes from 'prop-types';
 import { LIKE_ADD, LIKE_CLEAR, myContext } from '../../App';
 import '../../scss/card.scss';
-import PokeBola from './animaciones/PokeBola';
 
 const initialState = {
     // id: 0,
@@ -109,7 +108,7 @@ export default function Card( { name } ) {
             className='lista__pokemon-item'
             onClick={ toggleLike }
         >
-            { cargando ? <PokeBola/> : null }
+            { cargando ? <span>CARGANDO...</span> : null }
             <div className='lista__item-img-container' style={ { visibility: cargando ? 'hidden' : 'visible' } }>
                 <img src= { pokemon.foto } className='lista__item-img'></img>
             </div>
