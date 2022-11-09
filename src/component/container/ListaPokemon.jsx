@@ -3,19 +3,17 @@ import { listaPokemon, onePokemon, URL_POKEMON } from '../../service/FetchServic
 import Card from '../pure/Card';
 import Pagination from '@mui/material/Pagination';
 
-
 //Estilos
 import '../../scss/lista_pokemon.scss';
 
-
 let numeroPorPagina = 20;
 
-
-//TODO:
+//TODO: Mejorar codigo
 
 export default function ListaPokemon() {
 
     let initialPage = JSON.parse(localStorage.getItem('pokemonListaPosicion')) || {position:1};
+
     const [pag, setPag] = useState(initialPage);
 
     const initialState =  [];
@@ -31,16 +29,7 @@ export default function ListaPokemon() {
                 nuevaLista = [ ...nuevaLista, {name: pokemon.name, url: pokemon.url}]
             });
 
-            // let desde =  nuevaLista[0].url
-            //         .replace('https://pokeapi.co/api/v2/pokemon/','')
-            //         .replace('/','');
-            // let hasta = nuevaLista[nuevaLista.length - 1 ].url
-            //         .replace('https://pokeapi.co/api/v2/pokemon/','')
-            //         .replace('/','')
-
-
             setPokemonPagina( nuevaLista );
-
 
         } catch (error) {
             console.log(error)
@@ -49,13 +38,15 @@ export default function ListaPokemon() {
     }
 
     useEffect(() => {
-        
-        // let offsetParaPeticion = pokemonPagina.next.replace('https://pokeapi.co/api/v2/pokemon/?offset=', '').replace(`&limit=${numeroPorPagina}`,'');
-        let numero = (pag.position*20) - 20
+
+        let numero = (pag.position*20) - 20;
         cargarPokemons( `${URL_POKEMON}/?offset=${numero}&limit=${numeroPorPagina}` );
+
     }, [ ]);
 
+
     const cambioEstado = (event, value) => {
+        setPokemonPagina([]);
         setPag({position:value})
         let numero = (value*20) - 20
         cargarPokemons( `${URL_POKEMON}/?offset=${ numero }&limit=${numeroPorPagina}`)

@@ -3,6 +3,7 @@ import { onePokemon } from '../../service/FetchService';
 import PropTypes from 'prop-types';
 import { LIKE_ADD, LIKE_CLEAR, myContext } from '../../App';
 import '../../scss/card.scss';
+import { cleanup } from '@testing-library/react';
 
 const initialState = {
     // id: 0,
@@ -49,6 +50,7 @@ export default function Card( { name } ) {
 
             setPokemon({id, name, foto, like});
             setCargando(false);
+            
 
         } catch (error) {
             
@@ -60,7 +62,8 @@ export default function Card( { name } ) {
         setCargando(true);
         cargarPokemon();
 
-    }, [ name ])
+    }, [ name ]);
+
 
     useEffect(() => {
 
@@ -105,7 +108,8 @@ export default function Card( { name } ) {
             { cargando ? <span className='lista__item-cargando' >CARGANDO...</span> : null }
             <div className='lista__pokemon-item' style={ { visibility: cargando ? 'hidden' : 'visible' } }>
                 <div className='lista__item-img-container' style={ { visibility: cargando ? 'hidden' : 'visible' } }>
-                    <img src= { pokemon.foto } className='lista__item-img'></img>
+                    <img src= { pokemon.foto } className='lista__item-img'
+                    onChange={() => console.log('hola')}></img>
                 </div>
                 <h3 className='lista__item-id' > {pokemon.id } </h3>
                 <h4 className='lista__item-name' > { pokemon.name } </h4>

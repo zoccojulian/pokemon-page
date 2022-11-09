@@ -26,6 +26,7 @@
         background-image: url('../assets/fondo-card/FONDO_CARD.jpg');
         background-repeat: no-repeat;
         background-size: cover;
+        animation: rotacion 1s;
     
         .item__pokebola{
             position: absolute;
@@ -41,6 +42,7 @@
                 width: 95%;
                 height: 95%;
                 object-fit: contain;
+                animation: aparicion 1.5s;
             }
         }
         
@@ -63,3 +65,20 @@
     }
 }
 
+@keyframes aparicion {
+    0%{
+        transform: translateY(-100%);
+    }
+    100%{
+        transform: translateY(0%);
+    }
+}
+
+@keyframes rotacion {
+    0%{
+        transform:rotateY(90deg)
+    }
+    100%{
+        transform: translateY(0deg);
+    }
+}
