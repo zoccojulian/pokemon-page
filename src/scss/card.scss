@@ -1,49 +1,65 @@
-.lista__pokemon-item{
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 0.5rem;
-    border: 0.5px solid black;
-    border-radius: 15px;
+
+.lista__pokemon-li{
+
     width: 150px;
     height: 200px;
-    background-image: url('../assets/fondo-card/FONDO_CARD.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
+    position: relative;
 
-    .item__pokebola{
+    .lista__item-cargando{
+        font-size: 1rem;
         position: absolute;
+        top: calc(50% - 1rem);
+        width: 100%;
+        text-align: center;
+    }
+    .lista__pokemon-item{
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0.5rem;
+        border: 0.5px solid black;
+        border-radius: 15px;
         width: 100%;
         height: 100%;
-    }
-
-    .lista__item-img-container{
-        width: 90%;
-        height: 70%;
-
-        .lista__item-img{
-            width: 95%;
-            height: 95%;
-            object-fit: contain;
-        }
-    }
+        background-image: url('../assets/fondo-card/FONDO_CARD.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
     
-
-    .lista__item-id{
-        position: absolute;
-        left: 7px;
-        top: 5px;
-        margin: 0;
+        .item__pokebola{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+    
+        .lista__item-img-container{
+            width: 90%;
+            height: 70%;
+    
+            .lista__item-img{
+                width: 95%;
+                height: 95%;
+                object-fit: contain;
+            }
+        }
+        
+    
+        .lista__item-id{
+            position: absolute;
+            left: 7px;
+            top: 5px;
+            margin: 0;
+        }
+    
+        .lista__item-name{
+            margin: 0;
+        }
+    
+        .lista__item-like{
+            margin: 0;
+        }
+    
     }
-
-    .lista__item-name{
-        margin: 0;
-    }
-
-    .lista__item-like{
-        margin: 0;
-    }
-
 }
+

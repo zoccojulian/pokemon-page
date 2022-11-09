@@ -48,18 +48,12 @@ export default function Card( { name } ) {
             let like = isLike( id );
 
             setPokemon({id, name, foto, like});
-            
+            setCargando(false);
 
         } catch (error) {
             
         }
     }
-
-    useEffect(() => {
-        
-        setCargando(false)
-
-    }, [pokemon])
 
     useEffect(() => {
 
@@ -105,16 +99,19 @@ export default function Card( { name } ) {
 
     return (
         <li 
-            className='lista__pokemon-item'
+            className='lista__pokemon-li'
             onClick={ toggleLike }
         >
-            { cargando ? <span>CARGANDO...</span> : null }
-            <div className='lista__item-img-container' style={ { visibility: cargando ? 'hidden' : 'visible' } }>
-                <img src= { pokemon.foto } className='lista__item-img'></img>
+            { cargando ? <span className='lista__item-cargando' >CARGANDO...</span> : null }
+            <div className='lista__pokemon-item' style={ { visibility: cargando ? 'hidden' : 'visible' } }>
+                <div className='lista__item-img-container' style={ { visibility: cargando ? 'hidden' : 'visible' } }>
+                    <img src= { pokemon.foto } className='lista__item-img'></img>
+                </div>
+                <h3 className='lista__item-id' > {pokemon.id } </h3>
+                <h4 className='lista__item-name' > { pokemon.name } </h4>
+                <h5 className='lista__item-like' >{ pokemon.like ? 'like' : '' }</h5>
             </div>
-            <h3 className='lista__item-id' > {pokemon.id } </h3>
-            <h4 className='lista__item-name' > { pokemon.name } </h4>
-            <h5 className='lista__item-like' >{ pokemon.like ? 'like' : '' }</h5>
+            
         </li>
     )
 }
