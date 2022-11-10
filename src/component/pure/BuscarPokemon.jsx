@@ -34,6 +34,7 @@ export default function BuscarPokemon() {
 
     const submit = (e) => {
         e.preventDefault();
+        setPokemon({encontrado: false, textoError:''});
         buscarPokemon(idRef.current.value);
     }
 

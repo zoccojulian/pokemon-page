@@ -50,26 +50,39 @@ export default function Card( { name , scroll} ) {
             let like = isLike( id );
 
             setPokemon({id, name, foto, like});
+
             setCargando(false);
             
-
         } catch (error) {
-            
+            console.log(error);
         }
     }
 
     //Manejo del Scroll para que aparezca cuando aparece en pantalla
 
-    const [bandera, setBandera] = useState(false);
+    const [isAnimado, setIsAnimado] = useState(false);
     const li = useRef(null);
 
+    const inAnimacion = ( li ) => {
+        setIsAnimado(true);
+        li.current.classList.add('in');
+        
+    }
+
     useEffect(() => {
+
         let top = li.current.getBoundingClientRect().top;
+        if(top < (scroll.windowInner || scroll.documentElement) && !isAnimado){
 
-        if(top < (scroll.windowInner || scroll.documentElement) && !bandera){
-
-            li.current.classList.add('in');
-            setBandera(true)
+            //Este if se fija si cuando se activa este useEffect, todavia esta cargando
+            //(cargando == true) le da 1 segundo para que termine y luego hace ingresar
+            //la card con animacion.
+            //Si termino de cargar, (cargando == false), activa la animacion.
+            if(cargando) {
+                setTimeout( () => { inAnimacion( li ) } , 1000)
+            }else{
+                inAnimacion( li );
+            }
         }
 
     }, [ scroll ])
@@ -77,10 +90,9 @@ export default function Card( { name , scroll} ) {
 
     useEffect(() => {
 
-        setCargando(true);
         cargarPokemon();
 
-    }, [ name ]);
+    }, [ ]);
 
 
     useEffect(() => {
@@ -124,11 +136,15 @@ export default function Card( { name , scroll} ) {
             onClick={ toggleLike }
             ref={ li }
         >
-            { cargando ? <span className='lista__item-cargando' >CARGANDO...</span> : null }
-            <div className='lista__pokemon-item' style={ { visibility: cargando ? 'hidden' : 'visible' } }>
-                <div className='lista__item-img-container' style={ { visibility: cargando ? 'hidden' : 'visible' } }>
+            { cargando || !isAnimado ? 
+                <span className='lista__item-cargando' >CARGANDO...</span> 
+                :
+                null
+            }
+            <div className='lista__pokemon-item'>
+                <div className='lista__item-img-container'>
                     <img src= { pokemon.foto } className='lista__item-img'
-                    onChange={() => console.log('hola')}></img>
+                        onChange={() => console.log('hola')}></img>
                 </div>
                 <h3 className='lista__item-id' > {pokemon.id } </h3>
                 <h4 className='lista__item-name' > { pokemon.name } </h4>
