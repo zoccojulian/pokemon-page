@@ -49,8 +49,13 @@ export default function BuscarPokemon() {
                 </button>
             </form>
             { pokemon.textoError !== '' && <span>{ pokemon.textoError }</span> }
-            { pokemon.encontrado  && <Card name= { pokemon.nombre }></Card>}
-            
+            { pokemon.encontrado  && 
+            <Card 
+                scroll = {{
+                    windowInner: window.innerHeight, 
+                    documentElement: document.documentElement.clientHeight  
+                }}
+             name= { pokemon.nombre }></Card>}
         </div>
     )
 }

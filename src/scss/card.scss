@@ -26,8 +26,8 @@
         background-image: url('../assets/fondo-card/FONDO_CARD.jpg');
         background-repeat: no-repeat;
         background-size: cover;
-        animation: rotacion 1s;
-    
+        transform: rotateY(90deg);
+        transition: transform 1s;
         .item__pokebola{
             position: absolute;
             width: 100%;
@@ -42,7 +42,9 @@
                 width: 95%;
                 height: 95%;
                 object-fit: contain;
-                animation: aparicion 1.5s;
+                transform: translateY(-30%);
+                opacity: 0;
+                transition: transform 1s, opacity 1s;
             }
         }
         
@@ -63,22 +65,22 @@
         }
     
     }
-}
 
-@keyframes aparicion {
-    0%{
-        transform: translateY(-100%);
-    }
-    100%{
-        transform: translateY(0%);
-    }
-}
+    &.in{
+        
+        .lista__pokemon-item{
+            transform: rotateY(0deg);
 
-@keyframes rotacion {
-    0%{
-        transform:rotateY(90deg)
-    }
-    100%{
-        transform: translateY(0deg);
+            .lista__item-img-container{
+                
+        
+                .lista__item-img{
+                    
+                    transform: translateY(0%);
+                    opacity: 1;
+                }
+            }
+            
+        }
     }
 }

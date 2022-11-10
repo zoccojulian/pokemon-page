@@ -12,7 +12,8 @@ const initialState = {
     like: false
 };
 
-export default function Card( { name } ) {
+
+export default function Card( { name , scroll} ) {
 
     const [cargando, setCargando] = useState(true);
     
@@ -56,6 +57,23 @@ export default function Card( { name } ) {
             
         }
     }
+
+    //Manejo del Scroll para que aparezca cuando aparece en pantalla
+
+    const [bandera, setBandera] = useState(false);
+    const li = useRef(null);
+
+    useEffect(() => {
+        let top = li.current.getBoundingClientRect().top;
+
+        if(top < (scroll.windowInner || scroll.documentElement) && !bandera){
+
+            li.current.classList.add('in');
+            setBandera(true)
+        }
+
+    }, [ scroll ])
+
 
     useEffect(() => {
 
@@ -104,6 +122,7 @@ export default function Card( { name } ) {
         <li 
             className='lista__pokemon-li'
             onClick={ toggleLike }
+            ref={ li }
         >
             { cargando ? <span className='lista__item-cargando' >CARGANDO...</span> : null }
             <div className='lista__pokemon-item' style={ { visibility: cargando ? 'hidden' : 'visible' } }>

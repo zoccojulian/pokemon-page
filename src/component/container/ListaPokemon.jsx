@@ -37,13 +37,27 @@ export default function ListaPokemon() {
         }
     }
 
+    const [scroll, setScroll] = useState({
+        windowInner: window.innerHeight, 
+        documentElement: document.documentElement.clientHeight  
+    });
+
     useEffect(() => {
 
         let numero = (pag.position*20) - 20;
         cargarPokemons( `${URL_POKEMON}/?offset=${numero}&limit=${numeroPorPagina}` );
 
-    }, [ ]);
+        
+        window.addEventListener( 'scroll', (e) => {
+            setScroll(
+                {
+                    windowInner: window.innerHeight, 
+                    documentElement: document.documentElement.clientHeight  
+                }
+            ); 
+        });
 
+    }, [ ]);
 
     const cambioEstado = (event, value) => {
         setPokemonPagina([]);
@@ -65,7 +79,8 @@ export default function ListaPokemon() {
                 { pokemonPagina.map( ( pokemon , key ) => ( 
                     <Card  
                     key={ key } 
-                    { ...pokemon }
+                    { ...pokemon}
+                    scroll= { scroll }
                     ></Card>
                 )) }
             </ul>
