@@ -23,7 +23,7 @@ export default function BuscarPokemon() {
         try {
 
             const pokemonPrueba = await onePokemon(id);
-            const nombre = pokemonPrueba.forms[0].name ;
+            const nombre = pokemonPrueba.name ;
             // const url = pokemonPrueba.sprites.other['official-artwork'].front_default;
             setPokemon({ encontrado: true, textoError:'' ,nombre});
             

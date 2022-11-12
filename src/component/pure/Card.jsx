@@ -39,7 +39,8 @@ export default function Card( { name , scroll} ) {
         try {
             let datosPokemon = await onePokemon(name);
             let id = datosPokemon.id;
-            let nombre = datosPokemon.forms[0].name ;
+            // let nombre = datosPokemon.forms[0].name ;
+            let nombre = datosPokemon.name ;
             let foto = '';
             if( datosPokemon.sprites.other.dream_world.front_default !== null ){
                 foto = datosPokemon.sprites.other.dream_world.front_default
