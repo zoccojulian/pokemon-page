@@ -5,13 +5,6 @@
     height: 200px;
     position: relative;
 
-    .lista__item-cargando{
-        font-size: 1rem;
-        position: absolute;
-        top: calc(50% - 1rem);
-        width: 100%;
-        text-align: center;
-    }
     .lista__pokemon-item{
         display: flex;
         position: relative;
@@ -84,3 +77,5 @@
         }
     }
 }
+
+

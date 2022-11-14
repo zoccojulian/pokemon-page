@@ -2,8 +2,12 @@ import React, { useState , useRef, useEffect, useContext } from 'react';
 import { onePokemon } from '../../service/FetchService';
 import PropTypes from 'prop-types';
 import { LIKE_ADD, LIKE_CLEAR, myContext } from '../../App';
+import Pokebola from './Pokebola';
+
+//Estilos
 import '../../scss/card.scss';
-import { cleanup } from '@testing-library/react';
+
+
 
 const initialState = {
     // id: 0,
@@ -137,8 +141,9 @@ export default function Card( { name , scroll} ) {
             onClick={ toggleLike }
             ref={ li }
         >
+            
             { cargando || !isAnimado ? 
-                <span className='lista__item-cargando' >CARGANDO...</span> 
+                <Pokebola></Pokebola>
                 :
                 null
             }

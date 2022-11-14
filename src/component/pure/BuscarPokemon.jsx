@@ -15,6 +15,7 @@ export default function BuscarPokemon() {
     // const [pokemon, setPokemon] = useState(estadoInicial);
 
     const [pokemon, setPokemon] = useState(estadoInicial);
+    const [buscando, setBuscando] = useState(false);
 
     const idRef = useRef();
 
@@ -26,15 +27,17 @@ export default function BuscarPokemon() {
             const nombre = pokemonPrueba.name ;
             // const url = pokemonPrueba.sprites.other['official-artwork'].front_default;
             setPokemon({ encontrado: true, textoError:'' ,nombre});
-            
+            setBuscando(false)
         } catch (error) {
-            setPokemon({ encontrado:false, textoError:'No se econtró ningún pokemon',nombre: '' })
+            setPokemon({ encontrado:false, textoError:'No se econtró ningún pokemon',nombre: '' });
+            setBuscando(false);
         }
     }
 
     const submit = (e) => {
         e.preventDefault();
         setPokemon({encontrado: false, textoError:''});
+        setBuscando(true);
         buscarPokemon(idRef.current.value);
     }
 
@@ -49,6 +52,7 @@ export default function BuscarPokemon() {
                 POKEMON
                 </button>
             </form>
+            { buscando && <span>BUSCANDO...</span>}
             { pokemon.textoError !== '' && <span>{ pokemon.textoError }</span> }
             { pokemon.encontrado  && 
             <Card 

@@ -1,0 +1,54 @@
+.pokebola{
+    position: absolute;
+    width: 100%;
+
+
+    .pokebola-fondo{
+        position: absolute;
+        width: 100%;
+        animation: sombra-pokebola 1s infinite;
+    }
+    
+    .pokebola-centro{
+        position: absolute;
+        width: 100%;
+        animation: boton-pokebola 1s infinite;
+    }
+
+}
+
+@keyframes sombra-pokebola {
+    0%{
+        filter: drop-shadow(0 0 10px tomato);
+    }
+    25%{
+        filter: drop-shadow(0 0 0 tomato);
+    }
+    50%{
+        filter: drop-shadow(0 0 10px tomato);
+    }
+    75%{
+        filter: drop-shadow(0 0 0 tomato);
+    }
+    100%{
+        filter: drop-shadow(0 0 10px tomato);
+    }
+}
+
+@keyframes boton-pokebola {
+    0%{
+        opacity: 1;
+    }
+    25%{
+        opacity: 0;
+    }
+    50%{
+        opacity: 1;
+    }
+    75%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
