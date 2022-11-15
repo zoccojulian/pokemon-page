@@ -6,6 +6,7 @@ import Pokebola from './Pokebola';
 
 //Estilos
 import '../../scss/card.scss';
+import CargaCircular from './CargaCircular';
 
 
 
@@ -141,9 +142,8 @@ export default function Card( { name , scroll} ) {
             onClick={ toggleLike }
             ref={ li }
         >
-            
             { cargando || !isAnimado ? 
-                <Pokebola></Pokebola>
+                <CargaCircular ></CargaCircular>
                 :
                 null
             }

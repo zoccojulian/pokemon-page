@@ -1,10 +1,11 @@
 import React, { useEffect , useState , useContext, useRef } from 'react';
-import { listaPokemon, onePokemon, URL_POKEMON } from '../../service/FetchService';
+import { allPokemon, listaPokemon, onePokemon, URL_POKEMON } from '../../service/FetchService';
 import Card from '../pure/Card';
 import Pagination from '@mui/material/Pagination';
 
 //Estilos
 import '../../scss/lista_pokemon.scss';
+import SelectorCantidad from '../pure/SelectorCantidad';
 
 let numeroPorPagina = 20;
 
@@ -37,12 +38,26 @@ export default function ListaPokemon() {
         }
     }
 
+    const cargarDatosLista = async () => {
+
+        try {
+            const listaCompleta = await allPokemon();
+            let cantidadPokemon = listaCompleta.count;
+            let cantidadPaginas = Math.ceil(listaCompleta.count / 20);
+
+        } catch (error) {
+            
+        }
+    }
+
     const [scroll, setScroll] = useState({
         windowInner: window.innerHeight, 
         documentElement: document.documentElement.clientHeight  
     });
 
     useEffect(() => {
+
+        cargarDatosLista ();
 
         let numero = (pag.position*20) - 20;
         cargarPokemons( `${URL_POKEMON}/?offset=${numero}&limit=${numeroPorPagina}` );
@@ -70,7 +85,7 @@ export default function ListaPokemon() {
     return (
         <div className='lista__pokemon-container'>
             <h2 className='lista__pokemon-titulo'>Lista</h2>
-            
+            <SelectorCantidad></SelectorCantidad>
             <Pagination count={58} color="primary"
                 onChange={ cambioEstado }
                 page={pag.position}
