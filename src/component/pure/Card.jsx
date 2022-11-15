@@ -2,7 +2,9 @@ import React, { useState , useRef, useEffect, useContext } from 'react';
 import { onePokemon } from '../../service/FetchService';
 import PropTypes from 'prop-types';
 import { LIKE_ADD, LIKE_CLEAR, myContext } from '../../App';
-import Pokebola from './Pokebola';
+
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+
 
 //Estilos
 import '../../scss/card.scss';
@@ -141,6 +143,11 @@ export default function Card( { name , scroll} ) {
             className='lista__pokemon-li'
             onClick={ toggleLike }
             ref={ li }
+            style = {
+                {
+                    filter: pokemon.like ? 'drop-shadow(0 0 5px tomato)' : 'drop-shadow(0 0 0 tomato)'
+                }
+            }
         >
             { cargando || !isAnimado ? 
                 <CargaCircular ></CargaCircular>
@@ -154,9 +161,18 @@ export default function Card( { name , scroll} ) {
                 </div>
                 <h3 className='lista__item-id' > {pokemon.id } </h3>
                 <h4 className='lista__item-name' > { pokemon.name } </h4>
-                <h5 className='lista__item-like' >{ pokemon.like ? 'like' : '' }</h5>
+                {/* <h5 className='lista__item-like' >{ pokemon.like ? 'like' : '' }</h5> */}
+                <StarBorderIcon 
+                    className='lista__item-like'
+                    style = { 
+                        { 
+                            filter: pokemon.like ? 'drop-shadow(0 0 5px tomato)' : 'drop-shadow(0 0 0 tomato)',
+                            color: pokemon.like ? 'tomato' : 'black'
+                        } 
+                    }
+
+                ></StarBorderIcon>
             </div>
-            
         </li>
     )
 }
