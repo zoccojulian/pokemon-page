@@ -5,12 +5,14 @@ import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function SelectorCantidad() {
-  const [age, setAge] = useState(20)
+export default function SelectorCantidad( { cambioNumeroXPaginas , initialStateSeleccion} ) {
+  const [age, setAge] = useState(initialStateSeleccion)
 
   const handleChange = (event) => {
+    cambioNumeroXPaginas(event.target.value);
     setAge(event.target.value);
   };
+
 
   return (
     <div>

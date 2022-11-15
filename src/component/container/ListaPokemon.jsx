@@ -13,12 +13,17 @@ let numeroPorPagina = 20;
 
 export default function ListaPokemon() {
 
-    let initialPage = JSON.parse(localStorage.getItem('pokemonListaPosicion')) || {position:1};
+    let initialPage = JSON.parse(localStorage.getItem('pokemonListaPosicion')) || {position:1, cantidadXPagina:20};
 
     const [pag, setPag] = useState(initialPage);
 
+    const [cantidadTotal, setCantidadTotal] = useState({
+        pokemon: 0,
+        paginas: 0
+    });
+
+
     const initialState =  [];
-    
     const [pokemonPagina, setPokemonPagina] = useState(initialState);
 
     const cargarPokemons = async ( url ) => {
@@ -29,7 +34,6 @@ export default function ListaPokemon() {
             listaFetch.results.map( ( pokemon ) => {
                 nuevaLista = [ ...nuevaLista, {name: pokemon.name, url: pokemon.url}]
             });
-
             setPokemonPagina( nuevaLista );
 
         } catch (error) {
@@ -43,7 +47,13 @@ export default function ListaPokemon() {
         try {
             const listaCompleta = await allPokemon();
             let cantidadPokemon = listaCompleta.count;
-            let cantidadPaginas = Math.ceil(listaCompleta.count / 20);
+            let cantidadPaginas = Math.ceil(listaCompleta.count / pag.cantidadXPagina);
+            setCantidadTotal(
+                {
+                    pokemon: cantidadPokemon,
+                    paginas: cantidadPaginas
+                }
+            )
 
         } catch (error) {
             
@@ -59,8 +69,8 @@ export default function ListaPokemon() {
 
         cargarDatosLista ();
 
-        let numero = (pag.position*20) - 20;
-        cargarPokemons( `${URL_POKEMON}/?offset=${numero}&limit=${numeroPorPagina}` );
+        let numero = (pag.position*pag.cantidadXPagina) - pag.cantidadXPagina;
+        cargarPokemons( `${URL_POKEMON}/?offset=${numero}&limit=${pag.cantidadXPagina}` );
 
         
         window.addEventListener( 'scroll', (e) => {
@@ -74,19 +84,48 @@ export default function ListaPokemon() {
 
     }, [ ]);
 
+
+    useEffect(() => {
+        let cantidadPaginas = Math.ceil(cantidadTotal.pokemon / pag.cantidadXPagina);
+        setCantidadTotal(
+            {
+                ...cantidadTotal,
+                paginas: cantidadPaginas
+            }
+        )
+
+        let desde = (pag.position*pag.cantidadXPagina) - pag.cantidadXPagina;
+        setPokemonPagina([])
+        cargarPokemons( `${URL_POKEMON}/?offset=${desde}&limit=${pag.cantidadXPagina}` );
+    
+    }, [pag]);
+
+    const guardarJSON = ( position , cantidadxPagina ) => {
+        localStorage.setItem('pokemonListaPosicion', JSON.stringify({position:position, cantidadXPagina:cantidadxPagina}))
+    }
+
     const cambioEstado = (event, value) => {
-        setPokemonPagina([]);
-        setPag({position:value})
-        let numero = (value*20) - 20
-        cargarPokemons( `${URL_POKEMON}/?offset=${ numero }&limit=${numeroPorPagina}`)
-        localStorage.setItem('pokemonListaPosicion', JSON.stringify({position:value}))
+        setPag({...pag, position:value})
+        let numero = (value*pag.cantidadXPagina) - pag.cantidadXPagina
+        cargarPokemons( `${URL_POKEMON}?offset=${ numero }&limit=${pag.cantidadXPagina}`);
+        guardarJSON( value , pag.cantidadXPagina );
+        
+    }
+
+    const cambioNumeroXPaginas = ( numero ) => {
+
+        setPag({ position: 1 , cantidadXPagina: numero });
+        guardarJSON( 1 , numero );
     }
 
     return (
         <div className='lista__pokemon-container'>
             <h2 className='lista__pokemon-titulo'>Lista</h2>
-            <SelectorCantidad></SelectorCantidad>
-            <Pagination count={58} color="primary"
+            <SelectorCantidad
+                cambioNumeroXPaginas= { cambioNumeroXPaginas }
+                initialStateSeleccion = { initialPage.cantidadXPagina }
+            ></SelectorCantidad>
+            <Pagination count={ cantidadTotal.paginas } color="primary"
                 onChange={ cambioEstado }
                 page={pag.position}
             />
