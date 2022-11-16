@@ -5,10 +5,10 @@ import { LIKE_ADD, LIKE_CLEAR, myContext } from '../../App';
 
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 
-
 //Estilos
 import '../../scss/card.scss';
 import CargaCircular from './CargaCircular';
+import SinFoto from './SinFoto';
 
 
 
@@ -54,7 +54,7 @@ export default function Card( { name , scroll} ) {
             }else{
                 foto = datosPokemon.sprites.other['official-artwork'].front_default
             }
-            
+            console.log(foto)
             let like = isLike( id );
 
             setPokemon({id, name, foto, like});
@@ -141,7 +141,6 @@ export default function Card( { name , scroll} ) {
     return (
         <li 
             className='lista__pokemon-li'
-            onClick={ toggleLike }
             ref={ li }
             style = {
                 {
@@ -156,14 +155,19 @@ export default function Card( { name , scroll} ) {
             }
             <div className='lista__pokemon-item'>
                 <div className='lista__item-img-container'>
-                    <img src= { pokemon.foto } className='lista__item-img'
-                        onChange={() => console.log('hola')}></img>
+                    {/* <img src= { pokemon.foto } className='lista__item-img'></img> */}
+                    { pokemon.foto !== null ?  
+                        <img src= { pokemon.foto } className='lista__item-img'></img>
+                        :
+                        <SinFoto></SinFoto>
+                    }
                 </div>
                 <h3 className='lista__item-id' > {pokemon.id } </h3>
                 <h4 className='lista__item-name' > { pokemon.name } </h4>
                 {/* <h5 className='lista__item-like' >{ pokemon.like ? 'like' : '' }</h5> */}
                 <StarBorderIcon 
                     className='lista__item-like'
+                    onClick={ toggleLike }
                     style = { 
                         { 
                             filter: pokemon.like ? 'drop-shadow(0 0 5px tomato)' : 'drop-shadow(0 0 0 tomato)',

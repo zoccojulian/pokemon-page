@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { LIKE_CLEAR, myContext } from '../../App';
 import '../../scss/card_like.scss';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import SinFoto from './SinFoto';
 
 export default function CardLike( { pokemon } ) {
 
@@ -19,7 +20,11 @@ export default function CardLike( { pokemon } ) {
     return (
         <li className='likes__item'>
             {/* <span className='likes__item-id'>{ pokemon.id }</span> */}
-            <img src={ pokemon.foto } className='likes__item-img'></img>
+            { pokemon.foto !== null?
+                <img src={ pokemon.foto } className='likes__item-img'></img>
+                :
+                <SinFoto></SinFoto>
+             }
             <div className='like__footer'>
                 <span className='likes__item-name' >{ pokemon.name }</span>
                 <DeleteForeverIcon 

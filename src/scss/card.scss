@@ -25,14 +25,14 @@
         .lista__item-img-container{
             width: 90%;
             height: 70%;
+            transform: translateY(-30%);
+            opacity: 0;
+            transition: transform 1s, opacity 1s;
     
             .lista__item-img{
                 width: 95%;
                 height: 95%;
                 object-fit: contain;
-                transform: translateY(-30%);
-                opacity: 0;
-                transition: transform 1s, opacity 1s;
             }
         }
         
@@ -63,13 +63,14 @@
             transform: rotateY(0deg);
 
             .lista__item-img-container{
-                
-        
-                .lista__item-img{
-                    
-                    transform: translateY(0%);
+                transform: translateY(0%);
                     opacity: 1;
-                }
+        
+                // .lista__item-img{
+                    
+                    
+                // }
+
             }
             
         }
