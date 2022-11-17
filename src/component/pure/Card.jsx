@@ -54,7 +54,6 @@ export default function Card( { name , scroll} ) {
             }else{
                 foto = datosPokemon.sprites.other['official-artwork'].front_default
             }
-            console.log(foto)
             let like = isLike( id );
 
             setPokemon({id, name, foto, like});

@@ -4,4 +4,54 @@
     align-items: center;
     justify-content: center;
     gap: 1rem;
+    padding: 1rem;
+    width: 100%;
+
+    .buscar__form{
+        width: 90%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        max-width: 350px;
+        height: 50px;
+
+        .buscar__form-input{
+            width: 60%;
+            height: 95%;
+            border-radius: 10px;
+            font-size: 1.5rem;
+        }
+
+        .buscar__form-buttom{
+            height: 95%;
+            width: 30%;
+            border-radius: 10px;
+            background-color: rgb(255, 217, 0);
+            font-weight: 700;
+            font-size: 1.6rem;
+        }
+    }
+
+    .error__container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+
+        width: 100%;
+        height: 100%;
+
+        span{
+            font-size: 1.3rem;
+        }
+
+        img{
+            width: 200px;
+            border-radius: 100%;
+        }
+    }
+
+
 }

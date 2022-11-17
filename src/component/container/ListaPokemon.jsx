@@ -120,15 +120,20 @@ export default function ListaPokemon() {
 
     return (
         <div className='lista__pokemon-container'>
-            <h2 className='lista__pokemon-titulo'>Lista</h2>
-            <SelectorCantidad
-                cambioNumeroXPaginas= { cambioNumeroXPaginas }
-                initialStateSeleccion = { initialPage.cantidadXPagina }
-            ></SelectorCantidad>
-            <Pagination count={ cantidadTotal.paginas } color="primary"
-                onChange={ cambioEstado }
-                page={pag.position}
-            />
+            <div className='lista__pokemon-header'>
+                <div className='lista__pokemon-babecera'>
+                    <h2 className='lista__pokemon-titulo'>Lista</h2>
+                    <SelectorCantidad
+                        cambioNumeroXPaginas= { cambioNumeroXPaginas }
+                        initialStateSeleccion = { initialPage.cantidadXPagina }
+                    ></SelectorCantidad>
+                </div>
+                <Pagination count={ cantidadTotal.paginas } color="primary"
+                    onChange={ cambioEstado }
+                    page={pag.position}
+                    className='lista__pokemon-paginas'
+                />
+            </div>
             <ul className='lista__pokemon'>
                 { pokemonPagina.map( ( pokemon , key ) => ( 
                     <Card  

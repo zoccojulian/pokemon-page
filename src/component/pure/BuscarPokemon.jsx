@@ -3,6 +3,8 @@ import { onePokemon } from '../../service/FetchService';
 import Card from './Card';
 import '../../scss/buscar.scss';
 
+import imagenPikachu from '../../assets/imagen_error/pikachu_llorando.png'
+
 const estadoInicial = {
         encontrado: false,
         textoError:'',
@@ -43,17 +45,25 @@ export default function BuscarPokemon() {
 
     return (
         <div className='buscar'>
-            <form onSubmit={ submit }>
+            <form onSubmit={ submit } className='buscar__form'>
                 <input
                     placeholder='Numero nombre de Pokemon'
                     ref={ idRef }
+                    className='buscar__form-input'
                 ></input>
-                <button  type='submit'>
-                POKEMON
+                <button  type='submit' className='buscar__form-buttom'>
+                GO!
                 </button>
             </form>
             { buscando && <span>BUSCANDO...</span>}
-            { pokemon.textoError !== '' && <span>{ pokemon.textoError }</span> }
+            { pokemon.textoError !== '' && 
+                <div className='error__container'>
+                    <span>{ pokemon.textoError }</span>
+                    <img
+                    src={ imagenPikachu }
+                    ></img>
+                </div>
+             }
             { pokemon.encontrado  && 
             <Card 
                 scroll = {{

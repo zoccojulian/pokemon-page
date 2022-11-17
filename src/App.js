@@ -6,7 +6,8 @@ import ListaPokemon from './component/container/ListaPokemon';
 import ListaLikes from './component/container/ListaLikes';
 import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
 import Home from './page/Home';
-import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
+
+import Header from './component/container/Header';
 
 
 //Actions
@@ -49,73 +50,16 @@ function App() {
     
   }, [ stateLike ])
 
-  const [stateLink, setStateLink] = useState('HOME')
+ 
 
   
-  const itemLista = ( e ) => {
-    if(e.target.id !== ''){
-      console.log(e.target.id)
-      setStateLink(e.target.id);
-    }else if(e.target.parentNode.id !== '' ) {
-      setStateLink(e.target.parentNode.id);
-    }else if(e.target.parentNode.parentNode.id !== '' ) {
-      setStateLink(e.target.parentNode.parentNode.id);
-    }
-  }
+  
 
   return (
     <div className="App">
       <myContext.Provider value={ { stateLike, dispatchLike } } >
         <Router>
-          <header className='header'>
-            <div className='header__img'>
-              <img
-                src='https://media.vandal.net/i/1200x630/10-2021/2021105724573_1.jpg'
-                alt='imagen'
-              ></img>
-            </div>
-            <ul className='App__lista'>
-              <li className='App__lista__item'
-              >
-                <Link 
-                className='App__lista__item-link' to='/'
-                onClick={ itemLista }
-                id='HOME' >HOME</Link>
-                { stateLink == 'HOME' ?
-                <RadioButtonCheckedIcon className='item__elegido'/> : null }
-              </li>
-              <li className='App__lista__item'
-              >
-                <Link 
-                className='App__lista__item-link' to='/lista'
-                onClick={ itemLista }
-                id='LISTA'
-                >Lista de Pokemon</Link>
-                { stateLink == 'LISTA' ?
-                <RadioButtonCheckedIcon className='item__elegido'/> : null }
-              </li>
-              <li className='App__lista__item'>
-                <Link 
-                className='App__lista__item-link' to='/buscar'
-                onClick={ itemLista }
-                id='BUSCAR'
-                >Buscar</Link>
-                { stateLink == 'BUSCAR' ?
-                <RadioButtonCheckedIcon className='item__elegido'/> : null }
-              </li>
-              <li className='App__lista__item'>
-                <Link 
-                className='App__lista__item-link' to='/favoritos'
-                onClick={ itemLista }
-                id='FAVORITOS'
-                >
-                  Favoritos <span>{ stateLike.length }</span>
-                </Link>
-                { stateLink == 'FAVORITOS' ?
-                <RadioButtonCheckedIcon className='item__elegido'/> : null }
-              </li>
-            </ul>
-          </header>
+          <Header></Header>
           <main className='main'>
             <Routes>
               <Route exact path='/' element={ <Home></Home> } ></Route>

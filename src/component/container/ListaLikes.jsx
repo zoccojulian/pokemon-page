@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from 'react';
 import { LIKE_CLEAR, myContext } from '../../App';
 import CardLike from '../pure/CardLike';
 import '../../scss/lista_likes.scss'
-import Card from '../pure/Card';
 
 export default function ListaLikes() {
 
@@ -25,10 +24,6 @@ export default function ListaLikes() {
         });
 
     }, [ ]);
-
-    useEffect(() => {
-        console.log(stateLike)
-    }, [stateLike])
 
     return (
         <div className='likes__container'>
