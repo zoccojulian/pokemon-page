@@ -1,9 +1,11 @@
 import React, { useState , useRef, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { onePokemon } from '../../service/FetchService';
 import PropTypes from 'prop-types';
 import { LIKE_ADD, LIKE_CLEAR, myContext } from '../../App';
 
 import StarBorderIcon from '@mui/icons-material/StarBorder';
+import InfoIcon from '@mui/icons-material/Info';
 
 //Estilos
 import '../../scss/card.scss';
@@ -137,6 +139,12 @@ export default function Card( { name , scroll} ) {
         setPokemon({...pokemon, like: !pokemon.like})
     }
 
+    const history = useNavigate();
+
+    const verInfo = (e) => {
+        history(`/pokemon/${ pokemon.id }`);
+    }
+
     return (
         <li 
             className='lista__pokemon-li'
@@ -146,6 +154,7 @@ export default function Card( { name , scroll} ) {
                     filter: pokemon.like ? 'drop-shadow(0 0 5px tomato)' : 'drop-shadow(0 0 0 tomato)'
                 }
             }
+            
         >
             { cargando || !isAnimado ? 
                 <CargaCircular ></CargaCircular>
@@ -153,13 +162,18 @@ export default function Card( { name , scroll} ) {
                 null
             }
             <div className='lista__pokemon-item'>
-                <div className='lista__item-img-container'>
+                <div className='lista__item-img-container'
+                onClick= { verInfo }
+                >
                     {/* <img src= { pokemon.foto } className='lista__item-img'></img> */}
                     { pokemon.foto !== null ?  
                         <img src= { pokemon.foto } className='lista__item-img'></img>
                         :
                         <SinFoto></SinFoto>
                     }
+                    <InfoIcon 
+                    className='likes__info' 
+                ></InfoIcon>
                 </div>
                 <h3 className='lista__item-id' > {pokemon.id } </h3>
                 <h4 className='lista__item-name' > { pokemon.name } </h4>
@@ -175,6 +189,7 @@ export default function Card( { name , scroll} ) {
                     }
 
                 ></StarBorderIcon>
+                
             </div>
         </li>
     )

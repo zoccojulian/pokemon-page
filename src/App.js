@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
 import Home from './page/Home';
 
 import Header from './component/container/Header';
+import InfoPokemon from './component/container/InfoPokemon';
 
 
 //Actions
@@ -66,6 +67,7 @@ function App() {
               <Route exact path='/lista' element={ <ListaPokemon></ListaPokemon> } ></Route>
               <Route exact path='/buscar' element={ <BuscarPokemon></BuscarPokemon> } ></Route>
               <Route exact path='/favoritos' element={ <ListaLikes></ListaLikes> } ></Route>
+              <Route exact path='/pokemon/:id' element={ <InfoPokemon></InfoPokemon> } ></Route>
             </Routes>
           </main>
         </Router>

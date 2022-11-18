@@ -47,7 +47,7 @@ export default function BuscarPokemon() {
         <div className='buscar'>
             <form onSubmit={ submit } className='buscar__form'>
                 <input
-                    placeholder='Numero nombre de Pokemon'
+                    placeholder='Número / Nombre'
                     ref={ idRef }
                     className='buscar__form-input'
                 ></input>
