@@ -9,6 +9,7 @@ import Home from './page/Home';
 
 import Header from './component/container/Header';
 import InfoPokemon from './component/container/InfoPokemon';
+import BuscarPokemonAutocomplete from './component/pure/BuscarPokemonAutocomplete';
 
 
 //Actions
@@ -65,7 +66,7 @@ function App() {
             <Routes>
               <Route exact path='/' element={ <Home></Home> } ></Route>
               <Route exact path='/lista' element={ <ListaPokemon></ListaPokemon> } ></Route>
-              <Route exact path='/buscar' element={ <BuscarPokemon></BuscarPokemon> } ></Route>
+              <Route exact path='/buscar' element={ <BuscarPokemonAutocomplete></BuscarPokemonAutocomplete> } ></Route>
               <Route exact path='/favoritos' element={ <ListaLikes></ListaLikes> } ></Route>
               <Route exact path='/pokemon/:id' element={ <InfoPokemon></InfoPokemon> } ></Route>
             </Routes>
