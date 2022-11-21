@@ -47,6 +47,15 @@
                 font-style: italic;
                 color: black;
                 z-index: 2;
+                span{
+                    position: relative;
+                    .link__star{
+                        position: absolute;
+                        font-size: 2rem;
+                        bottom: 0px;
+                    }
+                }
+                
             }
 
             &:active{
@@ -65,3 +74,16 @@
         }
     }
 }
+
+
+// @media only screen and ( min-width:768px )  {
+    
+//     .header{
+
+//         .header__img{
+//             z-index: 10;
+//             position: absolute; 
+//         }
+
+//     }
+// }

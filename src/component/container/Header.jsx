@@ -1,8 +1,12 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
 import { myContext } from '../../App';
 import '../../scss/header.scss';
 import imagenPokemon from '../../assets/imagen_header/pokemon_juntos.png'
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+
+
+
 export default function Header() {
 
     const [stateLink, setStateLink] = useState('HOME')
@@ -18,6 +22,13 @@ export default function Header() {
           setStateLink(e.target.parentNode.parentNode.id);
         }
       }
+
+
+      useEffect(() => {
+        
+      }, [ stateLike ])
+
+
     return (
         <header className='header'>
             <div className='header__img'>
@@ -82,7 +93,10 @@ export default function Header() {
                 onClick={ itemLista }
                 id='FAVORITOS'
                 >
-                  Favoritos <span>{ stateLike.length }</span>
+                  Favoritos  
+                  <span> { stateLike.length }<StarBorderIcon
+                  className='link__star link__star-play{'
+                  ></StarBorderIcon></span>
                 </Link>
               </li>
               <img

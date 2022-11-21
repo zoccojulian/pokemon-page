@@ -1,6 +1,5 @@
 import React, { useState , useRef , useEffect } from 'react';
 import { allPokemon, onePokemon , URL_POKEMON} from '../../service/FetchService';
-import Card from './Card';
 import '../../scss/buscar.scss';
 
 import imagenPikachu from '../../assets/imagen_error/pikachu_llorando.png';
@@ -118,24 +117,43 @@ export default function BuscarPokemonAutocomplete() {
 
 
     const submit = (e) => {
+
         e.preventDefault();
-        setPokemon({encontrado: false, textoError:''});
-        setBuscando(true);
+        
+        if (inputValue !==''){
+                
+            setPokemon({encontrado: false, textoError:''});
+            setBuscando(true);
 
-        let idBuscar = listaPokemon.find( pokemon =>{ if( pokemon.label == inputValue ) return true })
+            let idBuscar = listaPokemon.find( pokemon =>{ if( pokemon.label == inputValue ) return true })
 
-        if( idBuscar !== undefined ){
-            buscarPokemon(idBuscar.id);
-        }else{
-            let coincidencias = listaPokemon.filter(( pokemon ) => pokemon.label.includes(`${inputValue}`));
 
-            if (coincidencias.length !==0  ){
-                buscarListaCoincidencias(coincidencias, inputValue);
+            //Si idBuscar es "undefined" es porque no seleccionó de la lista de opciones que le da el input
+            if( idBuscar !== undefined) {
+                buscarPokemon(idBuscar.id);
             }else{
-                buscarPokemon(inputValue);
-            }
-        }
+                let coincidencias = listaPokemon.filter(( pokemon ) => pokemon.label.includes(`${inputValue}`));
 
+                if (coincidencias.length !==0 ){
+                    buscarListaCoincidencias(coincidencias, inputValue);
+                }else{
+                    buscarPokemon(inputValue);
+                }
+            }
+        }else{
+            
+            setPokemon(
+                { 
+                    encontrado:false, 
+                    textoError:'Tienen que poner algo apra buscar',
+                    nombre: '',
+                    coincidencias:[]
+                }
+            );
+            setBuscando(false);
+
+
+        }
         
     }
 
@@ -154,6 +172,7 @@ export default function BuscarPokemonAutocomplete() {
                         options={listaPokemon.map((pokemon) => pokemon.label)}
                         renderInput={(params) => (
                         <TextField
+                            className='buscar__form-input-interno'
                             {...params}
                             label="Pokemon"
                             InputProps={{
