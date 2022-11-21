@@ -3,12 +3,13 @@
 
     .lista__pokemon-header{
         // padding-bottom: 1rem;
+
         .lista__pokemon-babecera{
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-            padding: 0 1rem 0 1rem;
-
+            align-items: center;
+            padding: 0 2rem 0 2rem;
 
             .lista__pokemon-titulo{
                 font-size: 2.5rem;
@@ -19,24 +20,9 @@
         .lista__pokemon-paginas{
             padding: 1rem 0 1rem 0;
             background-color: rgb(248, 238, 104);
+            display: flex;
+            justify-content: center;
         }
-        
-    }
-
-    .lista__pokemon{
-        // width: 95%;
-        padding: 0.3rem;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        gap: 1rem;
-
-        // background-image: url('../assets/fondo_home/FONDO_HOME.jpg');
-        // background-attachment: fixed;
-        // background-position: center;
-        // background-repeat: no-repeat;
-        // background-size:cover
         
     }
 

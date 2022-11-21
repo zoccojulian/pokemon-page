@@ -6,6 +6,7 @@ import Pagination from '@mui/material/Pagination';
 //Estilos
 import '../../scss/lista_pokemon.scss';
 import SelectorCantidad from '../pure/SelectorCantidad';
+import ListaConScroll from './ListaConScroll';
 
 let numeroPorPagina = 20;
 
@@ -60,10 +61,10 @@ export default function ListaPokemon() {
         }
     }
 
-    const [scroll, setScroll] = useState({
-        windowInner: window.innerHeight, 
-        documentElement: document.documentElement.clientHeight  
-    });
+    // const [scroll, setScroll] = useState({
+    //     windowInner: window.innerHeight, 
+    //     documentElement: document.documentElement.clientHeight  
+    // });
 
     useEffect(() => {
 
@@ -73,14 +74,14 @@ export default function ListaPokemon() {
         cargarPokemons( `${URL_POKEMON}/?offset=${numero}&limit=${pag.cantidadXPagina}` );
 
         
-        window.addEventListener( 'scroll', (e) => {
-            setScroll(
-                {
-                    windowInner: window.innerHeight, 
-                    documentElement: document.documentElement.clientHeight  
-                }
-            ); 
-        });
+        // window.addEventListener( 'scroll', (e) => {
+        //     setScroll(
+        //         {
+        //             windowInner: window.innerHeight, 
+        //             documentElement: document.documentElement.clientHeight  
+        //         }
+        //     ); 
+        // });
 
     }, [ ]);
 
@@ -134,15 +135,21 @@ export default function ListaPokemon() {
                     className='lista__pokemon-paginas'
                 />
             </div>
-            <ul className='lista__pokemon'>
-                { pokemonPagina.map( ( pokemon , key ) => ( 
-                    <Card  
-                    key={ key } 
-                    { ...pokemon}
-                    scroll= { scroll }
-                    ></Card>
-                )) }
-            </ul>
+            <ListaConScroll
+                lista={ pokemonPagina }
+            ></ListaConScroll>
+
         </div>
     )
 }
+
+
+// {/* <ul className='lista__pokemon'>
+//                 { pokemonPagina.map( ( pokemon , key ) => ( 
+//                     <Card  
+//                     key={ key } 
+//                     { ...pokemon}
+//                     scroll= { scroll }
+//                     ></Card>
+//                 )) }
+//             </ul> */}
