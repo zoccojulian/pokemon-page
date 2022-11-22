@@ -1,7 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { LIKE_CLEAR, myContext } from '../../App';
 import CardLike from '../pure/CardLike';
-import '../../scss/lista_likes.scss'
+import '../../scss/lista_likes.scss';
+import imagenPikachu from '../../assets/imagen_error/pikachu_llorando.png'
 
 export default function ListaLikes() {
 
@@ -28,11 +29,21 @@ export default function ListaLikes() {
     return (
         <div className='likes__container'>
             <h3 className='likes__name'>Favoritos</h3>
-            <ul className='likes__lista'>
+
+            { stateLike.length ==0 ?
+                <div className='error__container'>
+                    <span> La lista está vacía </span>
+                    <img
+                    src={ imagenPikachu }
+                    ></img>
+                </div>
+                :
+                <ul className='likes__lista'>
                 { stateLike.map( ( pokemon , key ) => 
                 <CardLike key={ key } pokemon= { pokemon }></CardLike>
                  ) }
             </ul>
+            }
         </div>
         
     )

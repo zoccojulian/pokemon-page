@@ -11,6 +11,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        // background-color: tomato;
         img{
             height: 100%;
         }
@@ -28,7 +29,7 @@
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
-
+        transition: all 1s;
 
         .App__lista__item{
             // z-index: 1;
@@ -37,6 +38,24 @@
             background-color: tomato;
             position: relative;
             transition: width 1.5s;
+
+            &:nth-child(1){
+                animation: 2s both inItemLista;
+            }
+
+            &:nth-child(2){
+                animation: 2s both inItemLista 0.5s;
+            }
+
+            &:nth-child(3){
+                animation: 2s both inItemLista 1s;
+            }
+
+            &:nth-child(4){
+                animation: 2s both inItemLista 1.5s;
+            }
+            
+
             .App__lista__item-link{
                 position: absolute;
                 text-decoration: none;
@@ -47,12 +66,20 @@
                 font-style: italic;
                 color: black;
                 z-index: 2;
+
                 span{
+
                     position: relative;
+
                     .link__star{
                         position: absolute;
                         font-size: 2rem;
                         bottom: 0px;
+                        transition: all;
+
+                        &.link__star-play{
+                            animation: starAnimation 1s  ;
+                        }
                     }
                 }
                 
@@ -70,20 +97,63 @@
             top: 0;
             right: 0;
             height: 100%;
-            z-index: 1;
+            // z-index: 0;
+            animation: 2s both inImagen 1.5s;
         }
     }
 }
 
-
-// @media only screen and ( min-width:768px )  {
+@keyframes starAnimation {
+    0%{
+        transform:scale(1);
+        filter: drop-shadow( 0 0 0 tomato);
+    }
+    50%{
+        transform:scale(1.5);
+        filter: drop-shadow( 0 0 10px tomato);
+    }
+    100%{
+        transform: scale(1);
+        filter: drop-shadow( 0 0 0 tomato);
+    }
     
-//     .header{
+}
 
-//         .header__img{
-//             z-index: 10;
-//             position: absolute; 
-//         }
+@keyframes inImagen {
+    0%{
+        right: -70%;
+        opacity: 0;
+    }
+    100%{
+        right: 0;
+        opacity: 1;
+    }
+    
+}
 
-//     }
-// }
+@keyframes inItemLista {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+
+@media only screen and ( min-width:768px )  {
+    
+    .header{
+
+        .header__img{
+            z-index: 10;
+            position: absolute;
+            bottom: -30px;
+            left: calc(50% - 90px);
+            z-index: 1;
+            width: 180px;
+            height: 100px;
+        }
+
+    }
+}

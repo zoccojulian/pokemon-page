@@ -1,9 +1,10 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect , useRef } from 'react';
 import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
 import { myContext } from '../../App';
 import '../../scss/header.scss';
 import imagenPokemon from '../../assets/imagen_header/pokemon_juntos.png'
 import StarBorderIcon from '@mui/icons-material/StarBorder';
+import imagenTituloPokemon from '../../assets/imagen_header/pokemon.png'
 
 
 
@@ -24,8 +25,15 @@ export default function Header() {
       }
 
 
+      const estrella = useRef(null);
+
       useEffect(() => {
         
+        estrella.current.classList.remove( 'link__star-play' )
+        setTimeout(() => {
+          estrella.current.classList.add( 'link__star-play' )
+        }, 100);
+
       }, [ stateLike ])
 
 
@@ -33,7 +41,7 @@ export default function Header() {
         <header className='header'>
             <div className='header__img'>
               <img
-                src='https://media.vandal.net/i/1200x630/10-2021/2021105724573_1.jpg'
+                src={ imagenTituloPokemon }
                 alt='imagen'
               ></img>
             </div>
@@ -94,8 +102,11 @@ export default function Header() {
                 id='FAVORITOS'
                 >
                   Favoritos  
-                  <span> { stateLike.length }<StarBorderIcon
-                  className='link__star link__star-play{'
+                  <span> { stateLike.length !==0 ?
+                     stateLike.length  : null
+                   }<StarBorderIcon
+                  className='link__star link__star-play'
+                  ref={ estrella }
                   ></StarBorderIcon></span>
                 </Link>
               </li>

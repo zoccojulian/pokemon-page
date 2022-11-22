@@ -9,3 +9,12 @@
         width: 100vw;
     }
 }
+
+@media only screen and ( min-width:768px )  {
+    
+    .App{
+        .main{
+            margin-top: 140px;
+        }
+    }
+}

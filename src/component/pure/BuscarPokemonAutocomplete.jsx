@@ -145,7 +145,7 @@ export default function BuscarPokemonAutocomplete() {
             setPokemon(
                 { 
                     encontrado:false, 
-                    textoError:'Tienen que poner algo apra buscar',
+                    textoError:'El input no puede estar vacío',
                     nombre: '',
                     coincidencias:[]
                 }
