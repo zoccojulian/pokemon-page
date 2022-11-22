@@ -1,27 +1,53 @@
-import React, { useEffect , useState } from 'react';
+import React, { useEffect , useState , useContext } from 'react';
 import { useNavigate , useParams} from 'react-router-dom';
+import { myContext } from '../../App';
 import { onePokemon } from '../../service/FetchService';
+import '../../scss/info_pokemon.scss';
+import SinFoto from '../pure/SinFoto';
+
 
 export default function InfoPokemon() {
 
-
+    const { stateLike, dispatchLike } = useContext(myContext);
     const history = useNavigate();
-    const [pokemon, setPokemon] = useState({})
+    const [pokemon, setPokemon] = useState({});
+    const { id } = useParams();
 
-    //TODO: no usar lo que trae el fetch.
-    //Armar un {objeto} inicial con los datos que voy a utilizar nulos o en cero o en ''
+    const isLike = ( id ) => {
+
+        if (stateLike.find( ( pokemon ) => {
+            if(pokemon.id == id)
+                return true
+            } )){
+                return true;
+            } else {
+                return false; 
+            }
+    }
+
 
     const volver = () => {
         history(-1);
     }
 
-    const { id } = useParams();
+
 
     const busquedaPokemon = async () => {
         try {
             
             const pokemonFetch = await onePokemon(id);
-            setPokemon(pokemonFetch)
+            let like = isLike(pokemonFetch.id);
+            setPokemon(
+                {
+                    id: pokemonFetch.id,
+                    name: pokemonFetch.name,
+                    like: like,
+                    height: pokemonFetch.height,
+                    weight: pokemonFetch.weight,
+                    image: pokemonFetch.sprites.other['official-artwork'].front_default
+                }
+            )
+            
             
         } catch (error) {
             console.log(error)
@@ -37,14 +63,42 @@ export default function InfoPokemon() {
 
 
     return (
-        <div>
-            <span> { pokemon.id } - {pokemon.name}</span>
-            <button
+        <div className='info__container'>
+            <div className='info__img'>
+                { pokemon.image == null ? 
+                    <SinFoto></SinFoto>
+                    :
+                    <img src={ pokemon.image }></img>
+                }
+                <button
+                className='img__button-volver'
                 onClick={ volver }
-                style= { { fontSize: '2rem' } }
-            >
-                Volver
-            </button>
+                >VOLVER</button>
+            </div>
+            <div className='info__description'>
+                <div className='info__description-nombre'>
+                    <h3>{ pokemon.name }</h3>
+                </div>
+                <div className='info__medidas'>
+                    <div className='info__medidas-item'>
+                        <h3 className='medida__item-titulo'>
+                            Height
+                        </h3>
+                        <h4 className='medida__item-valor'>
+                            { pokemon.height }
+                        </h4>
+                    </div>
+                    <div className='info__medidas-item'>
+                        <h3 className='medida__item-titulo'>
+                            Weight
+                        </h3>
+                        <h4 className='medida__item-valor'>
+                            { pokemon.weight }
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            
         </div>
     )
 }

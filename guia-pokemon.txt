@@ -1,0 +1,20 @@
+Height -> Está en decímetros
+weight  -> Está en Hectgramos
+Damage
+Flee Rate
+Max CP
+Max HP
+Evolution
+Requierement
+
+
+Type //https://pokeapi.co/api/v2/type
+
+Resistans
+
+Attacks
+    Fast
+    Special
+
+Evolutions
+

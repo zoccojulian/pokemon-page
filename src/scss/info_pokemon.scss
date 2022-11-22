@@ -1,0 +1,57 @@
+.info__container{
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-image: url('../assets/imagen_header//nubes_header.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    
+    .info__img{
+        width: 100%;
+        height: calc(100vh - 350px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+
+        background-image: url('../assets/fondo-card/FONDO_CARD.jpg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+
+        img{
+            width: 70%;
+            height: 70%;
+            object-fit: contain;
+        }
+
+        .img__button-volver{
+            position: absolute;
+            font-size: 2rem;
+            left: 0;
+            top: 0;
+        }
+    }
+
+    .info__description{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        .info__description-nombre{
+            width: 100%;
+            text-align: center;
+            padding: 1rem;
+            font-weight: 500;
+            font-style: italic;
+            h3{
+                font-size: 2rem;
+            }
+        }
+
+    }
+}
