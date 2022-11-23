@@ -16,12 +16,22 @@ export default function SelectorCantidad( { cambioNumeroXPaginas , initialStateS
 
   return (
     <div>
-      <FormControl sx={{ m: 1, minWidth: 120 }}>
+      <FormControl sx={
+        { 
+          m: 1, 
+          minWidth: 120, 
+          display: 'flex', 
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center'
+          }
+        }>
         <Select
           value={age}
           onChange={handleChange}
           displayEmpty
           inputProps={{ 'aria-label': 'Without label' }}
+          sx={ { height: 35 , width: 100} }
         >
           <MenuItem value={20}>20</MenuItem>
           <MenuItem value={50}>50</MenuItem>

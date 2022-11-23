@@ -10,7 +10,6 @@ import ListaConScroll from './ListaConScroll';
 
 let numeroPorPagina = 20;
 
-//TODO: Mejorar codigo
 
 export default function ListaPokemon() {
 

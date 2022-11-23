@@ -18,3 +18,15 @@
     }
 
 }
+
+@media only screen and ( min-width:660px )  {
+    .info__stats__item{
+        .info__stats__item-titulo{
+            font-size:  1rem;
+        }
+    
+        .info__stats__item-valor{
+            font-size:  0.8rem;
+        }
+    }
+}
