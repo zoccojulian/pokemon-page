@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect , useRef } from 'react';
-import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Route, Routes} from 'react-router-dom';
 import { myContext } from '../../App';
 import '../../scss/header.scss';
 import imagenPokemon from '../../assets/imagen_header/pokemon_juntos.png'
@@ -9,6 +9,8 @@ import imagenTituloPokemon from '../../assets/imagen_header/pokemon.png'
 
 
 export default function Header() {
+
+
 
     const [stateLink, setStateLink] = useState('HOME')
 

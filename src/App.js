@@ -4,7 +4,7 @@ import './scss/app.scss';
 import BuscarPokemon from './component/pure/BuscarPokemon';
 import ListaPokemon from './component/container/ListaPokemon';
 import ListaLikes from './component/container/ListaLikes';
-import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Route, Routes , HashRouter } from 'react-router-dom';
 import Home from './page/Home';
 
 import Header from './component/container/Header';
@@ -60,7 +60,8 @@ function App() {
   return (
     <div className="App">
       <myContext.Provider value={ { stateLike, dispatchLike } } >
-        <Router>
+        {/* <Router> */}
+        <HashRouter>
           <Header></Header>
           <main className='main'>
             <Routes>
@@ -71,7 +72,8 @@ function App() {
               <Route exact path='/pokemon/:id' element={ <InfoPokemon></InfoPokemon> } ></Route>
             </Routes>
           </main>
-        </Router>
+        </HashRouter>
+        {/* </Router> */}
       </myContext.Provider>
     </div>
     
