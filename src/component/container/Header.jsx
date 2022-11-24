@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect , useRef } from 'react';
-import { BrowserRouter as Router, Link, Route, Routes} from 'react-router-dom';
+import { Link , useLocation} from 'react-router-dom';
 import { myContext } from '../../App';
 import '../../scss/header.scss';
 import imagenPokemon from '../../assets/imagen_header/pokemon_juntos.png'
@@ -10,13 +10,32 @@ import imagenTituloPokemon from '../../assets/imagen_header/pokemon.png'
 
 export default function Header() {
 
+  let urlActual = useLocation();
 
+    const verUrlActual = ( ) => {
 
-    const [stateLink, setStateLink] = useState('HOME')
+      switch (urlActual.pathname) {
+
+        case '/':
+          return 'HOME';
+        case '/lista':
+          return 'LISTA';
+        case '/favoritos':
+          return 'FAVORITOS'
+        case '/buscar':
+          return 'BUSCAR';
+        default:
+          return '';
+      }
+    }
+
+    const initialLink = verUrlActual();
+    const [stateLink, setStateLink] = useState(initialLink);
 
     const { stateLike }  = useContext(myContext)
     
     const itemLista = ( e ) => {
+
         if(e.target.id !== ''){
           setStateLink(e.target.id);
         }else if(e.target.parentNode.id !== '' ) {
@@ -24,19 +43,28 @@ export default function Header() {
         }else if(e.target.parentNode.parentNode.id !== '' ) {
           setStateLink(e.target.parentNode.parentNode.id);
         }
-      }
+    }
 
 
-      const estrella = useRef(null);
+    const estrella = useRef(null);
 
-      useEffect(() => {
+    useEffect(() => {
         
-        estrella.current.classList.remove( 'link__star-play' )
-        setTimeout(() => {
-          estrella.current.classList.add( 'link__star-play' )
-        }, 100);
+      estrella.current.classList.remove( 'link__star-play' )
+      setTimeout(() => {
+        estrella.current.classList.add( 'link__star-play' )
+      }, 100);
 
-      }, [ stateLike ])
+    }, [ stateLike ])
+
+    useEffect(() => {
+      console.log(stateLink)
+      if ( stateLink === '' ){
+
+        const nuevoUrl = verUrlActual();
+        setStateLink(nuevoUrl);
+      }
+    });
 
 
     return (
