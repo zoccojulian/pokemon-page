@@ -1,6 +1,6 @@
 import React, { useEffect , useState , useContext } from 'react';
 import { useNavigate , useParams} from 'react-router-dom';
-import { myContext } from '../../App';
+import { LIKE_ADD, LIKE_CLEAR, myContext } from '../../App';
 import { onePokemon } from '../../service/FetchService';
 import '../../scss/info_pokemon.scss';
 import SinFoto from '../pure/SinFoto';
@@ -8,6 +8,7 @@ import SinFoto from '../pure/SinFoto';
 import HeightIcon from '@mui/icons-material/Height';
 import ScaleIcon from '@mui/icons-material/Scale';
 import ItemInfo from '../pure/ItemInfo';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
 
 
 
@@ -96,6 +97,33 @@ export default function InfoPokemon() {
 
     }, [])
 
+    const toggleLike = () => {
+        
+        if(pokemon.like == true){
+
+            dispatchLike( { 
+                type: LIKE_CLEAR , 
+                payload: {
+                    id: pokemon.id
+                }
+            });
+            
+        }else{
+
+            dispatchLike( { 
+                type: LIKE_ADD , 
+                payload: {
+                    id: pokemon.id,
+                    name: pokemon.name,
+                    foto: pokemon.image
+                }
+            });
+
+        }
+
+        setPokemon({...pokemon, like: !pokemon.like})
+    }
+
 
     return (
         <div className='info'>
@@ -110,6 +138,17 @@ export default function InfoPokemon() {
                     className='img__button-volver'
                     onClick={ volver }
                     >VOLVER</button>
+                    <StarBorderIcon 
+                    className='info__like'
+                    onClick={ toggleLike }
+                    style = { 
+                        { 
+                            filter: pokemon.like ? 'drop-shadow(0 0 5px tomato)' : 'drop-shadow(0 0 0 tomato)',
+                            color: pokemon.like ? 'tomato' : 'black'
+                        } 
+                    }
+
+                ></StarBorderIcon>
                 </div>
                 <div className='info__description'>
                     <div className='info__description-nombre'>

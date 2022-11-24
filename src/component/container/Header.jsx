@@ -58,9 +58,7 @@ export default function Header() {
     }, [ stateLike ])
 
     useEffect(() => {
-      console.log(stateLink)
       if ( stateLink === '' ){
-
         const nuevoUrl = verUrlActual();
         setStateLink(nuevoUrl);
       }
